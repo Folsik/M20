@@ -1,3 +1,4 @@
+from timeit import default_timer
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 
@@ -5,11 +6,12 @@ from django.shortcuts import render
 
 
 def web_index(request: HttpRequest):
-    print(request.path)
-    print(request.method)
-    print(request.headers)
-    return render(request, 'web/index.html')
+    products = [("Mango", 4), ("Dragon fruit", 6), ("Qiwi", 3)]
+    context = {"products": products, }
+    return render(request, 'web/index.html', context=context)
 
 
 def about(request):
-    return render(request, 'web/about.html')
+    people = [("Mark", 19), ("Alisa", 22), ("Stefan", 31)]
+    context = {"time": default_timer(), "people": people, }
+    return render(request, 'web/about.html', context=context)
