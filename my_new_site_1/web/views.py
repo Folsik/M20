@@ -12,6 +12,6 @@ def web_index(request: HttpRequest):
 
 
 def about(request):
-    people = [("Mark", 19), ("Alisa", 22), ("Stefan", 31)]
+    people = [("Mark", 19), ("Alisa", 22), ("Stefan", None)]
     context = {"time": default_timer(), "people": people, }
     return render(request, 'web/about.html', context=context)

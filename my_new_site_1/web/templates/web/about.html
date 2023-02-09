@@ -8,7 +8,7 @@
         {% now 'H:i' %}
         <ul>
         {% for name, age in people %}
-            <li>Name: {{ name }}, age: {{ age }} year</li>
+            <li>Name: {{ name|capfirst }}, age: {{ age | default:"--" }} year</li>
         {% endfor %}
         </ul>
     </div>
