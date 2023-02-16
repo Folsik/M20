@@ -1,0 +1,26 @@
+{% extends 'mainsite/general_file.html' %}
+
+{% block title %}News site{% endblock %}
+
+{% block content %}
+    <div class="feature">
+        <h1>News site</h1>
+
+        {% if news_today %}
+            {% for el in news_today %}
+                <div class="alert alert-warning">
+                    <h3>{{ el.title }}</h3>
+                    <p>{{ el.anons }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No records</p>
+        {% endif %}
+
+        <button class="btn btn-warning">Go to main page</button>
+
+        {% for value in values %}
+            <p>{{value}}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

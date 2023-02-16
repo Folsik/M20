@@ -1,0 +1,15 @@
+{% extends 'mainsite/general_file.html' %}
+
+{% block title %}Contacts{% endblock %}
+
+{% block content %}
+    <div class="feature">
+        <h1>Contacts</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos eius fugiat itaque molestias sit. Alias aliquid animi beatae dignissimos itaque odio optio quis voluptatem! Delectus dignissimos maxime modi voluptatem! Temporibus?</p>
+        <button class="btn btn-warning">Go to main page</button>
+
+        {% for value in values %}
+            <p>{{value}}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

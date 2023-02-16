@@ -1,0 +1,24 @@
+{% extends 'mainsite/general_file.html' %}
+
+{% block title %}Adding a new article{% endblock %}
+
+{% block content %}
+    <div class="feature">
+        <h1>New entry</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.title }}<br>
+            {{ form.anons }}<br>
+            {{ form.title_text }}<br>
+            {{ form.date }}<br>
+<!--            <input type="text" placeholder="Title of the article" class="form-control"><br>-->
+<!--            <input type="text" placeholder="Announcement of the article" class="form-control"><br>-->
+<!--            <textarea class="form-control" placeholder="The text of the article"></textarea><br>-->
+<!--            <input type="date" class="form-control"><br>-->
+<!--            <input type="time" class="form-control"><br>-->
+            <button class="btn btn-success" type="submit">Add an article</button>
+
+        </form>
+
+    </div>
+{% endblock %}
