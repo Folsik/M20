@@ -1,0 +1,15 @@
+{% extends 'web/general_file.html' %}
+
+{% block title %}О нас{% endblock %}
+
+{% block content %}
+    <div class="pipl">
+        <h1>О нас</h1>
+        {% now 'H:i' %}
+        <ul>
+        {% for name, age in people %}
+            <li>Name: {{ name }}, age: {{ age }} year</li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
