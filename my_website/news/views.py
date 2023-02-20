@@ -15,4 +15,4 @@ def create(request):
     data = {
         'form': form
     }
-    return render(request, 'news/create.html')
+    return render(request, 'news/create.html', data)
