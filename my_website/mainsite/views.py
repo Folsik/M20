@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Product
 
 # Create your views here.
 
@@ -6,9 +7,10 @@ from django.shortcuts import render
 def index(request):
     data = {
         'title': 'Main page',
-        'values': ['Some', 'Hello', 'name']
+        'values': ['Some', 'Hello', 'name'],
+        "products": Product.objects.all()
     }
-    return render(request, 'mainsite/main.html', data)
+    return render(request, 'mainsite/main.html',  data)
 
 
 def about(request):
@@ -17,3 +19,5 @@ def about(request):
 
 def contact(request):
     return render(request, 'mainsite/contact.html')
+
+

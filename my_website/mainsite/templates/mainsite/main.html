@@ -5,11 +5,23 @@
 {% block content %}
     <div class="feature">
         <h1>{{ title }}</h1>
+
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos eius fugiat itaque molestias sit. Alias aliquid animi beatae dignissimos itaque odio optio quis voluptatem! Delectus dignissimos maxime modi voluptatem! Temporibus?</p>
         <button class="btn btn-warning">To go about</button>
 
         {% for value in values %}
             <p>{{value}}</p>
         {% endfor %}
+        {% if products %}
+            {% for product in products %}
+                <div>
+                    <p>Name: {{ product.name }}</p>
+                    <p>Price: {{ product.price }}</p>
+                    <p>Discount: {{ product.discount }}</p>
+                </div>
+            {% endfor %}
+            {% else %}
+                <h3>No products</h3>
+        {% endif %}
     </div>
 {% endblock %}
