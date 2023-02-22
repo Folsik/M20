@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product
+from .models import Product, Other
 
 # Create your views here.
 
@@ -14,7 +14,10 @@ def index(request):
 
 
 def about(request):
-    return render(request, 'mainsite/about.html')
+    data = {
+        "other": Other.objects.select_related("user").prefetch_related("products").all()
+    }
+    return render(request, 'mainsite/about.html', data)
 
 
 def contact(request):

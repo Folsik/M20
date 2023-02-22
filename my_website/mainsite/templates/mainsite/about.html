@@ -7,5 +7,23 @@
         <h1>About</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos eius fugiat itaque molestias sit. Alias aliquid animi beatae dignissimos itaque odio optio quis voluptatem! Delectus dignissimos maxime modi voluptatem! Temporibus?</p>
         <button class="btn btn-danger">To go main page</button>
+        {% if other %}
+            {% for order in other %}
+                <div>
+                    <p>Order by {% firstof order.user.first_name order.user.username %}</p>
+                    <p>Promocode <code>{{ order.promocode }}</code></p>
+                    <p>Delivery address {{ order.delivery_address }}</p>
+                <ul>
+                    {% for product in order.products.all %}
+                        <li>
+                        {{ product.name }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                </div>
+            {% endfor %}
+        {% else %}
+                <h3>No order</h3>
+        {% endif %}
     </div>
 {% endblock %}
