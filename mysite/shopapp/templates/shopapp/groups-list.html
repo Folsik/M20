@@ -1,0 +1,28 @@
+{% extends 'shopapp/base.html' %}
+
+{% block title %}Group{% endblock %}
+
+{% block content %}
+    <div class="feature">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos eius fugiat itaque molestias sit. Alias aliquid animi beatae dignissimos itaque odio optio quis voluptatem! Delectus dignissimos maxime modi voluptatem! Temporibus?</p>
+
+        <button class="btn btn-warning">Add path</button>
+        <h1>Group:</h1>
+        {% if  not groups %}
+            <h1>No group yet</h1>
+        {% else %}
+            {% for group in groups %}
+                <li>{{ group.name }}</li>
+                <ul>
+                {% for permission in group.permissions.all %}
+                    <li>
+                    {{ permission.name }}
+                    (<code>{{ permission.codename }}</code>)
+                    </li>
+                {% endfor %}
+                
+                </ul>
+        {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
