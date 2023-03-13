@@ -18,7 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('shopapp/', include('shopapp.urls')),
+    path('shopapp/', include('shopapp.urls')),  # TODO без app будет лучше, просто shop/
     path('req/', include('requestdataapp.urls')),
 ]
 
