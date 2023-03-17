@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'requestdataapp.middlewares.CountRequestMiddleware',
     'requestdataapp.middlewares.SustainedRateThrottle',
     'requestdataapp.middlewares.BurstRateThrottle',
+    'mysite.requestdataapp.middlewares.check',
 ]
 
 ROOT_URLCONF = 'mysite.urls'

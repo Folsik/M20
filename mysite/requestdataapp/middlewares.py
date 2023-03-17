@@ -1,3 +1,5 @@
+from ipaddress import ip_address
+from linecache import cache
 from django.http import HttpRequest
 from rest_framework.throttling import UserRateThrottle
 
@@ -33,22 +35,29 @@ class CountRequestMiddleware:
         print("Got", self.exceptions_count, "exception so far")
 
 
-class BurstRateThrottle(UserRateThrottle):
-    scope = 'burst'
+# class BurstRateThrottle(UserRateThrottle):
+#     scope = 'burst'
+#
+#
+# class SustainedRateThrottle(UserRateThrottle):
+#     scope = 'sustained'
+#
+#
+# REST_FRAMEWORK = {
+#     'DEFAULT_THROTTLE_CLASSES': [
+#         'example.throttles.BurstRateThrottle',
+#          'example.throttles.SustainedRateThrottle'
+#     ],
+#     'DEFAULT_THROTTLE_RATES': {
+#         'burst': '60/min',
+#         'sustained': '1000/day'
+#     }
+# }
 
-
-class SustainedRateThrottle(UserRateThrottle):
-    scope = 'sustained'
-
-
-REST_FRAMEWORK = {
-    'DEFAULT_THROTTLE_CLASSES': [
-        'example.throttles.BurstRateThrottle',
-         'example.throttles.SustainedRateThrottle'
-    ],
-    'DEFAULT_THROTTLE_RATES': {
-        'burst': '60/min',
-        'sustained': '1000/day'
-    }
-}
-
+def check():
+    count = cache.get_or_set(f'ip:{ip_address}', 0, 10)
+    count += 1
+    if count > 7:
+        raise Exception('Exceeded the number of requests')
+    else:
+        cache.set(f'ip:{ip_address}', count, 5)
