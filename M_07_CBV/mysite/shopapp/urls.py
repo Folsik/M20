@@ -25,3 +25,4 @@ urlpatterns = [
     path("orders/", OrdersListView.as_view(), name="orders_list"),
     path("orders/<int:pk>/", OrdersDetailsView.as_view(), name="order_details"),
 ]
+
