@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-om6k&njqev66cr!2&)pemek@l3((bp)*f!gkl1rdl#@iq*55ea'
+SECRET_KEY = 'django-insecure-1a69flb_bfv(7-x24oo2@n(q1gshk6*j!0y8z01$r&ruzcnanq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shopapp.apps.ShopappConfig',
-    'requestdataapp.apps.RequestdataappConfig',
+    'mysite.myauth.apps.MyauthConfig',
 ]
 
 MIDDLEWARE = [
@@ -49,11 +48,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'requestdataapp.middlewares.setup_useragent_on_request_middleware',
-    'requestdataapp.middlewares.CountRequestMiddleware',
-    'requestdataapp.middlewares.SustainedRateThrottle',
-    'requestdataapp.middlewares.BurstRateThrottle',
-    'mysite.requestdataapp.middlewares.check',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
