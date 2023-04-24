@@ -12,6 +12,7 @@ class Product(models.Model):
     discount = models.SmallIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     archived = models.BooleanField(default=False)
+    # TODO пункт 5 задания не выполнен
 
     def __str__(self):
         return f"Product(pk={self.pk}, name={self.name!r})"
