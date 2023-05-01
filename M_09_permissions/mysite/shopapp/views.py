@@ -26,20 +26,16 @@ class ProductsListView(ListView):
     queryset = Product.objects.filter(archived=False)
 
 
-class ProductCreateView(UserPassesTestMixin, CreateView):
-    # TODO по пункту 6 в задании имелось ввиду, что нужно проверить наличие у пользователя разрешения add_product,
-    #  используйте для этого другой миксин -- PermissionRequiredMixin
-    def test_func(self):
-        return self.request.user.is_superuser
-        # return self.request.user.groups.filter(name="secret-group").exists()
+class ProductCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = "shopapp.add_permission"
     model = Product
     fields = "name", "price", "description", "discount"
     success_url = reverse_lazy("shopapp:products_list")
-    # TODO пункты 7 и 8 не выполнены
 
 
-class ProductUpdateView(UpdateView):
-    # TODO не выполнен пункт 9 задания, тут надо применить UserPassesTestMixin
+class ProductUpdateView(UserPassesTestMixin, UpdateView):
+    def test_func(self):
+        return self.request.user.groups.filter(name="").exists() or self.request.user.is_superuser
     model = Product
     fields = "name", "price", "description", "discount"
     template_name_suffix = "_update_form"
