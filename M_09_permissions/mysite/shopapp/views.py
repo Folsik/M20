@@ -39,9 +39,12 @@ class ProductCreateView(PermissionRequiredMixin, CreateView):
     # TODO По поводу пункта 8: в шаблоне надо проверить наличие разрешения для отображения ссылки на создания товара:
     #  {% if perms.shopapp.add_product %}  тут html-код ссылки на создание товара {% endif %}
 
+
 class ProductUpdateView(UserPassesTestMixin, UpdateView):
     def test_func(self):
         return self.request.user.groups.filter(name="").exists() or self.request.user.is_superuser
+        # TODO Что за группа с "пустым" названием и зачем проверять её наличие? Проверить надо принадлежность товара
+        #  пользователю из запроса: self.get_object().created_by == self.request.user
 
     model = Product
     fields = "name", "price", "description", "discount"
