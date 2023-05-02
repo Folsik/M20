@@ -27,15 +27,22 @@ class ProductsListView(ListView):
 
 
 class ProductCreateView(PermissionRequiredMixin, CreateView):
-    permission_required = "shopapp.add_permission"
+    permission_required = "shopapp.add_permission"  # TODO такого разрешения не существует, но есть add_product
     model = Product
     fields = "name", "price", "description", "discount"
     success_url = reverse_lazy("shopapp:products_list")
 
+    # TODO чтобы привязать созданный товар к пользователю, переопределите метод form_valid, где, согласно подсказке
+    #  присвоить полю формы объект пользователя из запроса: form.instance.created_by = self.request.user и сохранить
+    #  форму
+
+    # TODO По поводу пункта 8: в шаблоне надо проверить наличие разрешения для отображения ссылки на создания товара:
+    #  {% if perms.shopapp.add_product %}  тут html-код ссылки на создание товара {% endif %}
 
 class ProductUpdateView(UserPassesTestMixin, UpdateView):
     def test_func(self):
         return self.request.user.groups.filter(name="").exists() or self.request.user.is_superuser
+
     model = Product
     fields = "name", "price", "description", "discount"
     template_name_suffix = "_update_form"
