@@ -24,7 +24,16 @@
   {% endif %}
 
   <div>
-    <a href="{% url 'shopapp:product_create' %}"
-      >Create a new product</a>
+    {% if perms.foo %}
+        <p>У вас есть доступ</p>
+        {% if perms.foo.add_vote %}
+            <a href="{% url 'shopapp:product_create' %}"
+            <a>Create a new product</a>
+        {% endif %}
+    {% else %}
+        <p>У вас нет доступа</p>
+    {% endif %}
+
+
   </div>
 {% endblock %}

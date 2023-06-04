@@ -27,15 +27,19 @@ class ProductsListView(ListView):
 
 
 class ProductCreateView(PermissionRequiredMixin, CreateView):
-    permission_required = "shopapp.add_permission"
+    permission_required = "shopapp.add_product"
     model = Product
     fields = "name", "price", "description", "discount"
     success_url = reverse_lazy("shopapp:products_list")
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
 
 
 class ProductUpdateView(UserPassesTestMixin, UpdateView):
     def test_func(self):
-        return self.request.user.groups.filter(name="").exists() or self.request.user.is_superuser
+        return self.get_object().created_by == self.request.user
+        #return self.request.user.groups.filter(name="").exists() or self.request.user.is_superuser (с пустыми скобками тупанул)
     model = Product
     fields = "name", "price", "description", "discount"
     template_name_suffix = "_update_form"
