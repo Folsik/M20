@@ -50,7 +50,7 @@ class UserDetailsView(DetailView):
 
 class UserUpdateView(UserPassesTestMixin, UpdateView):
     model = Profile
-    fields = ('avater')
+    fields = ('avatar')
     def test_func(self):
         if self.request.user.is_staff or self.request.user.pk ==  self.get_object().user_id:
             return True

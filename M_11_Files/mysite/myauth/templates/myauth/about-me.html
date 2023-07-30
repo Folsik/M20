@@ -9,13 +9,13 @@
   <h1>User info</h1>
   {% if user.is_authenticated %}
       {% if user.profile.avatar %}
-          <img src="{{ user.profile.avatar.url }, {user.profile.avatar.name}}">
+          <img src="{{ user.profile.avatar.url}}" alt="{{user.profile.avatar.name}}">
       {% else %}
         No avatar
       {% elif %}
-            {% if request.user.is_staff or request.user.pk=user.pk %}
-                <a href="{% url 'accounts:user_update' pk=user.profile.pk %}"><h3>Update avatar</h3></a>
-      {% elif %}
+          {% if request.user.is_staff and request.user.is_superuser %}
+                <a href="{% url 'myauth:user_update' pk=user.profile.pk %}"><h3>Update avatar</h3></a>
+          {% endif %}
             <p>Username: {{ user.username }}</p>
             <p>First name: {{ user.first_name }}</p>
             <p>Last name: {{ user.last_name }}</p>
