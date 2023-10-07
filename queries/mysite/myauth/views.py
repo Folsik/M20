@@ -1,14 +1,25 @@
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.views import LogoutView
-from django.http import HttpRequest, HttpResponse
+from django.contrib.auth.views import LogoutView, LoginView
+from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.http.response import JsonResponse
-from django.views.generic import TemplateView, CreateView
-
+from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView
+from django.contrib.auth.models import User
 from .models import Profile
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.utils.translation import gettext_lazy as _, ngettext
+import logging
+
+logger = logging.getLogger(__name__)
+
+class UserLoginView(LoginView):
+    template_name = "myauth/login.html"
+    redirect_authenticated_user = True
+    def get_success_url(self):
+        logger.info(f"Пользователь {self.request.user.username} авторизовался")
+        return self.get_redirect_url() or self.get_default_redirect_url()
 
 
 class AboutMeView(TemplateView):
@@ -36,6 +47,10 @@ class RegisterView(CreateView):
 
 class MyLogoutView(LogoutView):
     next_page = reverse_lazy("myauth:login")
+
+class UsersList(ListView):
+    template_name = "myauth/users-list.html"
+    context_object_name = "profiles"
 
 
 @user_passes_test(lambda u: u.is_superuser)
