@@ -21,3 +21,4 @@ class ExportAsCSVMixin:
         return response
 
     export_as_csv.short_description = "Export as CSV"
+

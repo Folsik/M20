@@ -1,8 +1,0 @@
-2023-10-28 20:43:02,857 INFO django.utils.autoreload: Watching for file changes with StatReloader
-2023-10-28 20:43:14,958 WARNING django.request: Not Found: /
-2023-10-28 20:43:15,393 WARNING django.request: Not Found: /favicon.ico
-2023-10-28 20:43:15,405 WARNING django.request: Not Found: /apple-touch-icon-precomposed.png
-2023-10-28 20:43:15,438 WARNING django.request: Not Found: /apple-touch-icon.png
-2023-10-28 20:43:27,776 WARNING django.request: Not Found: /
-2023-10-28 20:43:46,051 WARNING django.request: Not Found: /
-2023-10-28 20:43:57,796 WARNING django.request: Not Found: /products/export/

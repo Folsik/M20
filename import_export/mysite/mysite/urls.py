@@ -17,11 +17,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import sitemap
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('shop/', include('shopapp.urls')),
     path('myauth/', include('myauth.urls')),
+    path('blog/', include('blogapp.urls')),
+    path('sitemap.xml', sitemap, {"sitemaps": sitemap}, name="django.contrib.sitemaps.views")
 ]
 
 if settings.DEBUG:
