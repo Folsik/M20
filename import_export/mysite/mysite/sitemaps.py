@@ -4,4 +4,3 @@ from shopapp.sitemap import ShopSitemap
 sitemap = {
     "blog": BlogSitemap,
     "shop": ShopSitemap,
-}

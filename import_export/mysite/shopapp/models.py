@@ -1,7 +1,9 @@
 from typing import TYPE_CHECKING
 
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.db import models
+from django.forms import ModelForm
 from django.db.models import Manager
 
 
@@ -29,6 +31,21 @@ class Product(models.Model):
 
     if TYPE_CHECKING:
         objects: Manager
+
+    def get_absolute_url(self):
+        return reverse('shopapp:product_details', kwargs={'pk': self.pk})
+
+
+# class ProductImportForm(ModelForm):
+#     class Meta:
+#         model = ProductImport
+#         fields = ('csv_file',)
+#
+#
+# class ProductImport(models.Model):
+#     csv_file = models.FileField(upload_to='uploads/')
+#     date_added = models.DateTimeField(auto_now_add=True)
+
 
 def product_images_directory_path(instance: "ProductImage", filename: str) -> str:
     return "products/product_{pk}/images/{filename}".format(

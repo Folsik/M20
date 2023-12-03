@@ -105,6 +105,7 @@ class ProductInline(admin.StackedInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
+    change_list = "shopapp/orders_changelist.html"
     inlines = [
         ProductInline,
     ]
@@ -115,3 +116,21 @@ class OrderAdmin(admin.ModelAdmin):
 
     def user_verbose(self, obj: Order) -> str:
         return obj.user.first_name or obj.user.username
+
+    def import_csv_orders(self, request: HttpRequest) -> HttpResponse:
+        form = CSVImportForms()
+        context = {
+            "form": form,
+        }
+        return render(request, "admin/csv_form.html", context)
+
+    def get_urls(self):
+        urls = super().get_urls()
+        new_urls = [
+            path(
+                "import-orders-csv/",
+                self.import_csv,
+                name="import_orders_csv",
+            )
+        ]
+        return new_urls + urls
