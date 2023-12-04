@@ -9,7 +9,7 @@ class ArticleListView(ListView):
     queryset =(
         Article.objects
         .filter(published_at__isnull=False)
-        .orders_by("-published_at")
+        .order_by("-published_at")
     )
 
 

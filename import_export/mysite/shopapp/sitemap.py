@@ -7,7 +7,7 @@ class ShopSitemap(Sitemap):
     priority = 1
 
     def items(self):
-        return Product.objects.filter(publishhed_at__isnull=False).order_bu("-product_details")
+        return Product.objects.filter(created_at__isnull=False).order_by("-created_at")
 
     def lastmod(self, obj: Product):
-        return obj.product_details
+        return obj.created_at

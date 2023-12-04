@@ -129,7 +129,7 @@ class OrderAdmin(admin.ModelAdmin):
         new_urls = [
             path(
                 "import-orders-csv/",
-                self.import_csv,
+                self.import_csv_orders,
                 name="import_orders_csv",
             )
         ]

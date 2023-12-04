@@ -1,6 +1,7 @@
 from blogapp.sitemap import BlogSitemap
 from shopapp.sitemap import ShopSitemap
 
-sitemap = {
+sitemaps = {
     "blog": BlogSitemap,
     "shop": ShopSitemap,
+}
